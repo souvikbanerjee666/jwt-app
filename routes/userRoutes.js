@@ -3,6 +3,8 @@
 const express = require('express');
 const RC = require('../controllers/registercontroller');
 const LC = require('../controllers/loginController');
+const tokenController = require('../controllers/tokenController');
+
 
 const router = express.Router();
 
@@ -16,5 +18,16 @@ router.post('/register', RC);
 
 // Login route
 router.post('/login', LC);
+
+router.post("/refresh", tokenController.tokenRefresh);
+
+// Find user route
+router.get('/finduser/:uid', tokenController.schUser);
+
+// Insert user route
+router.post('/insert', tokenController.insertUser);
+
+// Delete user route
+router.delete('/delete/:id', tokenController.deleteUser);
 
 module.exports = router;
